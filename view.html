@@ -1,0 +1,99 @@
+<!-- view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Appointments</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: royalblue;
+    }
+
+    #inputSection {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    #inputSection input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+
+    #inputSection button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      background-color: royalblue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .appointment {
+      background: white;
+      margin: 15px auto;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .appointment p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Your Appointments</h2>
+
+  <div id="inputSection">
+    <input type="email" id="patientEmail" placeholder="Enter your email">
+    <button onclick="loadAppointments()">Show Appointments</button>
+  </div>
+
+  <div id="appointmentsList"></div>
+
+  <script>
+    function loadAppointments() {
+      const email = document.getElementById("patientEmail").value.trim();
+      const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+      const filtered = appointments.filter(app => app.patientEmail === email);
+
+      const container = document.getElementById("appointmentsList");
+      container.innerHTML = "";
+
+      if (!email) {
+        alert("Please enter your email");
+        return;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = "<p style='text-align:center;'>No appointments found for this email.</p>";
+        return;
+      }
+
+      filtered.forEach(app => {
+        const div = document.createElement("div");
+        div.className = "appointment";
+        div.innerHTML = `
+          <h3>Dr. ${app.doctorName}</h3>
+          <p><strong>Specialization:</strong> ${app.specialization}</p>
+          <p><strong>Date:</strong> ${app.date}</p>
+          <p><strong>Time:</strong> ${app.time}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>

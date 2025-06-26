@@ -1,0 +1,70 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .register-box h2 {
+      margin-bottom: 20px;
+      color: royalblue;
+    }
+
+    .register-box button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: royalblue;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .register-box button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h2>Select Your Role</h2>
+
+    <!-- Button to register as Doctor -->
+    <a href="doctorForm.html">
+      <button>Register as Doctor</button>
+    </a>
+
+    <!-- Button to register as Patient -->
+    <a href="userRegister.html">
+      <button>Register as Patient</button>
+    </a>
+
+     <!-- Button to register as admin -->
+    <a href="adminRegister.html">
+      <button>Register as Admin</button>
+    </a>
+  </div>
+
+</body>
+</html>

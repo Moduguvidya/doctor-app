@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f0fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register-box {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: royalblue;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 12px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      background-color: royalblue;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h2>Admin Registration</h2>
+    <form id="adminForm">
+      <label for="adminName">Full Name</label>
+      <input type="text" id="adminName" required>
+
+      <label for="adminEmail">Email</label>
+      <input type="email" id="adminEmail" required>
+
+      <label for="adminPassword">Password</label>
+      <input type="password" id="adminPassword" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("adminForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("adminName").value;
+      const email = document.getElementById("adminEmail").value;
+      const password = document.getElementById("adminPassword").value;
+
+      const newAdmin = { name, email, password };
+
+      let admins = JSON.parse(localStorage.getItem("admins")) || [];
+
+      // Check if email already exists
+      const exists = admins.some(admin => admin.email === email);
+      if (exists) {
+        alert("Admin with this email already exists. Please login.");
+        return;
+      }
+
+      admins.push(newAdmin);
+      localStorage.setItem("admins", JSON.stringify(admins));
+
+      alert("Admin registration successful! Please login.");
+      window.location.href = "login.html"; // Navigate to login page
+    });
+  </script>
+
+</body>
+</html>

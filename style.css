@@ -1,0 +1,142 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #e5e5e5;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.buttons .btn {
+  margin-left: 15px;
+  padding: 8px 20px;
+  background-color: #e91e63;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Main section */
+.main-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 50px;
+}
+
+.image-section img {
+  max-width: 450px;
+  height: auto;
+}
+
+.content-section {
+  max-width: 500px;
+}
+
+.content-section h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.content-section p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.book-btn {
+  background-color: #e91e63;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.book-btn:hover {
+  background-color: #e6b800;
+}
+
+book-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+/* Form Styles */
+.form-container {
+  width: 350px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+form input, form select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0056b3;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.btn {
+  background-color: #4c63af; /*  background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Add some padding */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add a rounded corner effect */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.btn:hover {
+  background-color: #a8ada8; /* Darker green background color on hover */
+}

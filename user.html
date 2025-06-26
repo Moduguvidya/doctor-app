@@ -1,0 +1,112 @@
+<!-- user.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .dashboard {
+      background-color: #fff;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: royalblue;
+    }
+
+    button {
+      display: block;
+      width: 80%;
+      margin: 15px auto;
+      padding: 14px;
+      font-size: 16px;
+      background-color: royalblue;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+    <h2>Welcome to Your Dashboard</h2>
+    
+    <button onclick="goToBook()">Book a Doctor</button>
+    <button onclick="goToView()">View Appointments</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "your-app.firebaseapp.com",
+      projectId: "your-app-id",
+      storageBucket: "your-app.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // If user is not logged in, redirect to login.html
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    function goToBook() {
+      window.location.href = "book.html";
+    }
+
+    function goToView() {
+      window.location.href = "view.html";
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        alert("Logged out successfully!");
+        window.location.href = "login.html";
+      }).catch((error) => {
+        alert("Logout error: " + error.message);
+      });
+    }
+    
+  function logout() {
+    // Clear patient login session
+    localStorage.removeItem("loggedInPatient");
+
+    // Optional: Clear all storage
+    // localStorage.clear();
+
+    // Redirect to home page
+    window.location.href = "index.html";
+  }
+</script>
+
+  </script>
+
+</body>
+</html>

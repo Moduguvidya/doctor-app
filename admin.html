@@ -1,0 +1,135 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: royalblue;
+    }
+
+    section {
+      margin: 40px auto;
+      max-width: 800px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      margin: 6px 0;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      margin: 5px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .approve { background: green; }
+    .reject { background: red; }
+  </style>
+</head>
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<section>
+  <h2>Pending Doctor Approvals</h2>
+  <div id="pendingDoctors"></div>
+</section>
+
+<section>
+  <h2>Registered Patients</h2>
+  <div id="patientsList"></div>
+</section>
+
+<script>
+  // Load doctors and patients from localStorage
+  let doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+  const pendingDoctorsContainer = document.getElementById("pendingDoctors");
+  const patientsListContainer = document.getElementById("patientsList");
+
+  // Show pending doctors
+  const pendingDoctors = doctors.filter(d => d.status === "pending");
+  if (pendingDoctors.length === 0) {
+    pendingDoctorsContainer.innerHTML = "<p>No pending doctors.</p>";
+  } else {
+    pendingDoctors.forEach(doctor => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <p><strong>Name:</strong> ${doctor.name}</p>
+        <p><strong>Email:</strong> ${doctor.email}</p>
+        <p><strong>Specialization:</strong> ${doctor.specialization}</p>
+        <button class="btn approve" onclick="approveDoctor('${doctor.email}')">Approve</button>
+        <button class="btn reject" onclick="rejectDoctor('${doctor.email}')">Reject</button>
+      `;
+
+      pendingDoctorsContainer.appendChild(card);
+    });
+  }
+
+  // Show all registered patients
+  if (patients.length === 0) {
+    patientsListContainer.innerHTML = "<p>No registered patients.</p>";
+  } else {
+    patients.forEach(patient => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <p><strong>Name:</strong> ${patient.name}</p>
+        <p><strong>Email:</strong> ${patient.email}</p>
+      `;
+
+      patientsListContainer.appendChild(card);
+    });
+  }
+
+  // Approve doctor
+  function approveDoctor(email) {
+    doctors = doctors.map(doc => {
+      if (doc.email === email) {
+        doc.status = "approved";
+      }
+      return doc;
+    });
+    localStorage.setItem("doctors", JSON.stringify(doctors));
+    alert("Doctor approved!");
+    location.reload();
+  }
+
+  // Reject doctor
+  function rejectDoctor(email) {
+    doctors = doctors.filter(doc => doc.email !== email);
+    localStorage.setItem("doctors", JSON.stringify(doctors));
+    alert("Doctor rejected and removed.");
+    location.reload();
+  }
+</script>
+
+</body>
+</html>

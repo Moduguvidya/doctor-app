@@ -1,0 +1,67 @@
+<!-- doctor.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>doctor - All Appointments</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef3f8;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: royalblue;
+    }
+
+    .appointment {
+      background: white;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    .appointment p {
+      margin: 8px 0;
+    }
+
+    .appointment h3 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>All Booked Appointments</h2>
+
+<div id="appointmentsContainer"></div>
+
+<script>
+  const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+  const container = document.getElementById("appointmentsContainer");
+
+  if (appointments.length === 0) {
+    container.innerHTML = "<p style='text-align:center;'>No appointments found.</p>";
+  } else {
+    appointments.forEach(app => {
+      const div = document.createElement("div");
+      div.className = "appointment";
+      div.innerHTML = `
+        <h3>Appointment with Dr. ${app.doctorName}</h3>
+        <p><strong>Specialization:</strong> ${app.specialization}</p>
+        <p><strong>Patient Name:</strong> ${app.patientName}</p>
+        <p><strong>Patient Email:</strong> ${app.patientEmail}</p>
+        <p><strong>Date:</strong> ${app.date}</p>
+        <p><strong>Time:</strong> ${app.time}</p>
+      `;
+      container.appendChild(div);
+    });
+  }
+</script>
+
+</body>
+</html>

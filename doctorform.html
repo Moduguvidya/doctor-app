@@ -1,0 +1,129 @@
+<!-- doctorForm.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      color: royalblue;
+    }
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: royalblue;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Doctor Registration</h2>
+
+  <form id="doctorForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+
+    <label for="phoneno">phoneno</label>
+    <input type="number" id="phoneno" required>
+
+
+    <label for="address">Address</label>
+    <input type="text" id="address" required>
+
+    <label for="specialization">Specialization</label>
+    <input type="text" id="specialization" required>
+
+    <label for="experience">Experience (in years)</label>
+    <input type="number" id="experience" required>
+
+    <label for="fees">Fees (₹)</label>
+    <input type="number" id="fees" required>
+
+    <label for="timings">Timings</label>
+    <input type="text" id="timings" required placeholder="e.g. 10 AM - 1 PM">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" required>
+
+    <label for="password">password</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Submit for Approval</button>
+  </form>
+
+  <script>
+    document.getElementById("doctorForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const doctor = {
+        name: document.getElementById("name").value,
+        phoneno: document.getElementById("phoneno").value,
+        address: document.getElementById("address").value,
+        specialization: document.getElementById("specialization").value,
+        experience: document.getElementById("experience").value,
+        fees: document.getElementById("fees").value,
+        timings: document.getElementById("timings").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        status: "pending" // 🔴 Doctor needs approval
+      };
+
+      let doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+
+      // Check if email already exists
+      const alreadyExists = doctors.some(doc => doc.email === doctor.email);
+      if (alreadyExists) {
+        alert("Doctor with this email already exists.");
+        return;
+      }
+
+      doctors.push(doctor);
+      localStorage.setItem("doctors", JSON.stringify(doctors));
+
+      alert("Doctor profile submitted! Awaiting admin approval.");
+      window.location.href = "doctor.html";
+    });
+  </script>
+
+</body>
+</html>

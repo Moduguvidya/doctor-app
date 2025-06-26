@@ -1,0 +1,126 @@
+<!-- book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a Doctor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: royalblue;
+    }
+
+    .doctor-card {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+
+    .doctor-card p {
+      margin: 6px 0;
+    }
+
+    .form {
+      margin-top: 15px;
+      background: #f7f9fb;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .form input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form button {
+      padding: 10px 15px;
+      background-color: royalblue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Available Doctors</h2>
+<div id="doctorsList"></div>
+
+<script>
+  const doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  const doctorsList = document.getElementById("doctorsList");
+
+  if (doctors.length === 0) {
+    doctorsList.innerHTML = "<p style='text-align:center;'>No doctors available.</p>";
+  } else {
+    doctors.forEach((doctor, index) => {
+      const card = document.createElement("div");
+      card.className = "doctor-card";
+
+      card.innerHTML = `
+        <h3>${doctor.name}</h3>
+        <p><strong>Specialization:</strong> ${doctor.specialization}</p>
+        <p><strong>Experience:</strong> ${doctor.experience} years</p>
+        <p><strong>Fees:</strong> ₹${doctor.fees}</p>
+        <p><strong>Timings:</strong> ${doctor.timings}</p>
+        <p><strong>Address:</strong> ${doctor.address}</p>
+        <div class="form">
+          <input type="text" placeholder="Your Name" class="pname" required>
+          <input type="email" placeholder="Your Email" class="pemail" required>
+          <input type="date" class="pdate" required>
+          <input type="time" class="ptime" required>
+          <button onclick="bookAppointment(${index}, this)">Book Appointment</button>
+        </div>
+      `;
+      doctorsList.appendChild(card);
+    });
+  }
+
+  function bookAppointment(index, btn) {
+    const form = btn.parentElement;
+    const name = form.querySelector(".pname").value;
+    const email = form.querySelector(".pemail").value;
+    const date = form.querySelector(".pdate").value;
+    const time = form.querySelector(".ptime").value;
+
+    if (!name || !email || !date || !time) {
+      alert("Please fill all fields!");
+      return;
+    }
+
+    const selectedDoctor = doctors[index];
+    const appointment = {
+      doctorName: selectedDoctor.name,
+      specialization: selectedDoctor.specialization,
+      patientName: name,
+      patientEmail: email,
+      date: date,
+      time: time
+    };
+
+    let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+    appointments.push(appointment);
+    localStorage.setItem("appointments", JSON.stringify(appointments));
+
+    alert("Appointment booked successfully!");
+    form.reset();
+  }
+</script>
+
+</body>
+</html>
