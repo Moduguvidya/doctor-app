@@ -1,4 +1,3 @@
-<!-- user.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,35 +46,17 @@
 
   <div class="dashboard">
     <h2>Welcome to Your Dashboard</h2>
-    
     <button onclick="goToBook()">Book a Doctor</button>
     <button onclick="goToView()">View Appointments</button>
     <button onclick="logout()">Logout</button>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
-
   <script>
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "your-app.firebaseapp.com",
-      projectId: "your-app-id",
-      storageBucket: "your-app.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    // If user is not logged in, redirect to login.html
-    auth.onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
+    // Check if patient is logged in
+    const patient = JSON.parse(localStorage.getItem("loggedInPatient"));
+    if (!patient) {
+      window.location.href = "login.html"; // Redirect if not logged in
+    }
 
     function goToBook() {
       window.location.href = "book.html";
@@ -86,26 +67,9 @@
     }
 
     function logout() {
-      auth.signOut().then(() => {
-        alert("Logged out successfully!");
-        window.location.href = "login.html";
-      }).catch((error) => {
-        alert("Logout error: " + error.message);
-      });
+      localStorage.removeItem("loggedInPatient"); // Clear session
+      window.location.href = "index.html"; // Redirect to home
     }
-    
-  function logout() {
-    // Clear patient login session
-    localStorage.removeItem("loggedInPatient");
-
-    // Optional: Clear all storage
-    // localStorage.clear();
-
-    // Redirect to home page
-    window.location.href = "index.html";
-  }
-</script>
-
   </script>
 
 </body>
