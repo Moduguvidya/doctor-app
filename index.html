@@ -2,33 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Book a Doctor</title>
- <link rel="stylesheet" href="style.css">
+  <title>Book a Doctor - Home</title>
+  <link rel="stylesheet" href="style.css"> <!-- Optional -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .header {
+      background-color: rgb(65, 68, 225);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      color: white;
+      background-color: rgb(216, 17, 196);
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    .buttons a:hover {
+      background-color: darkblue;
+    }
+
+    .main-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .image-section img {
+      width: 300px;
+      height: auto;
+      border-radius: 12px;
+      margin-right: 30px;
+    }
+
+    .content-section {
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .content-section h2 {
+      color: royalblue;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .content-section p {
+      font-size: 16px;
+      color: #444;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: rgb(225, 65, 190);
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: rgb(139, 0, 113);
+    }
+  </style>
 </head>
 <body>
+
   <header class="header">
     <div class="logo">BOOK A DOCTOR</div>
     <div class="buttons">
-      <a class="btn" href="login.html">Login</a>
-      <a class="btn" href="register.html">Register</a>
-      
-    
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
     </div>
   </header>
 
   <main class="main-section">
     <div class="image-section">
-      <img src="C:\Users\vidya\OneDrive\Desktop\doctor-group.png"alt="Doctors Group">
-      
+      <img src="C:\Users\vidya\OneDrive\Desktop\doctor-group.png" alt="Doctors Group">
     </div>
     <div class="content-section">
-      <h2>Effortlessly schedule your doctor</h2>
+      <h2>Effortlessly Schedule Your Doctor</h2>
       <p>
-        Appointments with just a few clicks,<br>
+        Book appointments with just a few clicks,<br>
         putting your health in your hands.
       </p>
       <a class="btn" href="book.html">Book Your Doctor</a>
     </div>
   </main>
+
 </body>
 </html>
